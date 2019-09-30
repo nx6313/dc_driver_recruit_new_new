@@ -6,8 +6,8 @@ import Store from './store'
 Vue.use(Router)
 
 let router = new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  // mode: 'history',
+  // base: '/h5/driver_recruit_simulate/',
   routes: [
     {
       path: '/',

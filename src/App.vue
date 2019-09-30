@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <template v-if="currentSupportDevice">
-      <router-view v-if="isRouterAlive"/>
+      <router-view/>
       <span v-if="isShowServiceTypeTool" class="currentServiceType" v-drag:config="{ about: ['top', 'right'], overstep: false, inertia: true, recover: true, tap: showLogVc }">
         <span class="tip">当前服务器</span>
         <span class="content">
@@ -24,11 +24,6 @@
 import Marquee from '@/components/Marquee.vue'
 
 export default {
-  provide() {
-    return {
-      reload: this.reload
-    }
-  },
   data() {
     return {
       isRouterAlive: true
@@ -53,12 +48,6 @@ export default {
     if (appPageLoading != null) document.body.removeChild(appPageLoading)
   },
   methods: {
-    reload() {
-      this.isRouterAlive = false
-      this.$nextTick(() => {
-        this.isRouterAlive = true
-      })
-    },
     showLogVc() {
       if (this.$vconsole) this.$vconsole.show()
     }

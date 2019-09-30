@@ -37,9 +37,7 @@ export default {
   },
   methods: {
     refPageData (refFlag) {
-      if (refFlag) {
-        this.$emit('reLoad')
-      }
+      if (refFlag) {}
     }
   }
 }
