@@ -44,6 +44,19 @@ export default new Vuex.Store({
       },
       actions: {}
     },
+    // 接口key值
+    apiDcsnt: {
+      state: {
+        dcsnt: null
+      },
+      getters: {},
+      mutations: {
+        updateDcsnt (state, payload) {
+          state.dcsnt = payload
+        }
+      },
+      actions: {}
+    },
     // 用户选择司机招募的类型以及用户手机号信息
     userBaseInfo: {
       state: {

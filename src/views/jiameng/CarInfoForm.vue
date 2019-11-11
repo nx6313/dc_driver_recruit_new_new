@@ -270,7 +270,13 @@ export default {
             dataSubmitOk: true
           }
         })
-        this.$router.back()
+        this.$router.replace({
+          path: '/auditStatus',
+          query: {
+            selectCarKey: 1,
+            status: 0
+          }
+        })
       })
     },
     verifyData (callBack) {

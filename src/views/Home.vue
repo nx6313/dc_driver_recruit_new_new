@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <swiper :options="bannerOption" class="bannerWrap">
+    <swiper :options="bannerOption" class="bannerWrap" :style="{ height: `${$SCREEN_OPT.width * 1.2}px` }">
       <swiper-slide v-for="(banner, bannerIndex) in banners" v-bind:key="bannerIndex">
         <div class="bannerContentWrap" :style="{ backgroundImage: `url(${banner})` }"></div>
       </swiper-slide>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="joinInBtn" @click="toJoinDcDriver">加入大昌优驾</div>
-    <div class="outLoginLink" @click="loginOut">退出登录</div>
+    <!-- <div class="outLoginLink" @click="loginOut">退出登录</div> -->
   </div>
 </template>
 
@@ -46,16 +46,15 @@ export default {
   },
   methods: {
     showDcDriverApplyCommonQuestion () {
-      this.$comfun.showToast(this, '常见问题页面还没开发了')
+      this.$router.push('/commonIssue')
     },
     dcDriverApplyContactServer () {
-      this.$comfun.showToast(this, '这个打电话用原生实现吗，敲定一下')
+      this.$webapp.sendUrlToApp('tel:4000568888', true)
     },
     toJoinDcDriver () {
       this.$router.push('/applyIndex')
     },
     loginOut () {
-      this.$comfun.showToast(this, '还没开发了')
     }
   }
 }
@@ -72,15 +71,13 @@ export default {
 @outLoginLinkTop: 0.4rem;
 .home {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
   display: -webkit-flex; /* Safari */
   display: flex;
   flex-direction: column;
   .bannerWrap {
     position: relative;
-    flex: 1;
     width: calc(100% - 2 * @pageSlide);
+    height: 28rem;
     margin-top: @pageTop;
     border-radius: 4px;
     overflow: hidden;

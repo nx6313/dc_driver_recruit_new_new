@@ -76,6 +76,15 @@ let router = new Router({
       }
     },
     {
+      path: '/commonIssue',
+      name: 'commonIssue',
+      component: () => import(/* webpackChunkName: "commonIssue" */ './views/CommonIssue.vue'),
+      meta: {
+        pageBg: '#f2f2f2',
+        title: '常见问题'
+      }
+    },
+    {
       path: '/jiameng/citySelect',
       name: 'jiameng-citySelect',
       component: () => import(/* webpackChunkName: "jiameng-citySelect" */ './views/jiameng/CitySelect.vue'),

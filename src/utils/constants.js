@@ -1,7 +1,7 @@
 export const APP_CONFIG = {
   isTest: true, // 设置h5是否为测试环境，将忽略内置环境 开启顶部服务器提示调试工具
-  localhostServerBaseUrl: 'http://172.18.4.73:8080/' // 默认环境 仅影响本地
-  // localhostServerBaseUrl: 'https://test.dcchuxing.com/'
+  // localhostServerBaseUrl: 'http://172.18.4.73:8080/' // 默认环境 仅影响本地
+  localhostServerBaseUrl: 'https://test.dcchuxing.com/'
 }
 
 export const APP_DATA = {

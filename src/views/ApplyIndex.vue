@@ -74,7 +74,7 @@ export default {
     toApplyJoinDcDriver () {
       if (!this.$appData.hasAuthInfoInUrl(this) && !this.$appData.hasAuthInfo(this) && this.autoShowLoginPage) {
         console.log('正在通过 h5 方式访问，没有检测到登陆信息')
-        this.$router.push('/login')
+        // this.$router.push('/login')
         return false
       }
       if (this.selectCarKey == 1) {
@@ -87,13 +87,14 @@ export default {
             this.$router.push({
               path: '/auditStatus',
               query: {
-                status: statusResult.data.num
+                status: statusResult.data.num,
+                selectCarKey: this.selectCarKey
               }
             })
           }
         })
       } else if (this.selectCarKey == 2) {
-        this.$comfun.showToast(this, '新版专车逻辑正在开发，请使用旧版')
+        window.location.href = `${location.origin.startsWith('http://localhost:') ? 'https://test.dcchuxing.com' : location.origin}/h5/new_driver_recruit/#/?token=${this.$store.state.auth.token}&secret=${this.$store.state.auth.secret}`
       } else if (this.selectCarKey == 3) {
         this.$http.postForm(this, this.$api.getIntercityStatus, {
           phone: this.$store.state.userBaseInfo.phone
@@ -104,7 +105,8 @@ export default {
             this.$router.push({
               path: '/auditStatus',
               query: {
-                status: statusResult.data.num
+                status: statusResult.data.num,
+                selectCarKey: this.selectCarKey
               }
             })
           }
@@ -140,8 +142,6 @@ export default {
 @applyCarTypeSelectBottom: 0.8rem;
 .applyIndex {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
   display: -webkit-flex; /* Safari */
   display: flex;
   flex-direction: column;
@@ -188,7 +188,7 @@ export default {
   }
   .applyCarTypeSelect {
     position: relative;
-    flex: 1;
+    height: 12rem;
     margin: @applyCarTypeSelectTop @pageSlide @applyCarTypeSelectBottom;
     display: -webkit-flex; /* Safari */
     display: flex;
@@ -231,6 +231,7 @@ export default {
     height: 5.4rem;
     margin-bottom: 0.4rem;
     pointer-events: none;
+    overflow: hidden;
     .carTypeItem {
       position: absolute;
       top: 0;

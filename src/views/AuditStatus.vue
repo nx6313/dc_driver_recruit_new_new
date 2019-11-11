@@ -10,18 +10,18 @@
       <div class="contentTip" v-if="status == 2">非常抱歉，您提交的资料未通过审核，感谢您的参与</div>
       <div class="contentTip" v-if="status == 3">您有资料需要完善，点击按钮前往上传</div>
       <div class="contentTip" v-if="status == 4">您当前已经是大昌司机了，无法再申请注册加盟司机</div>
-      <div v-waves class="downloadBtn" v-if="status == 1">下载大昌优驾APP</div>
-      <div v-waves class="downloadBtn" v-if="status == 2">重新申请</div>
+      <div v-waves class="downloadBtn" v-if="status == 1" @click="toDownloadApp">下载大昌优驾APP</div>
+      <div v-waves class="downloadBtn" v-if="status == 2" @click="toReapply">重新申请</div>
       <div v-waves class="downloadBtn" v-if="status == 3" @click="dataCompletion">完善资料</div>
     </div>
     <div class="footerData">
       <div class="infoItem">
         <span>我们希望你能了解一些</span>
-        <span class="link">常见问题</span>
+        <span class="link" @click="showDcDriverApplyCommonQuestion">常见问题</span>
       </div>
       <div class="infoItem">
         <span>有问题时，也可以</span>
-        <span class="link">联系客服</span>
+        <span class="link" @click="dcDriverApplyContactServer">联系客服</span>
         <span>进行咨询</span>
       </div>
       <img class="footerImg" :src="require('@/assets/get_order_learn.png')" @click="toOrderReceivingSimulation">
@@ -34,10 +34,12 @@ export default {
   name: 'auditStatus',
   data () {
     return {
+      selectCarKey: null,
       status: null
     }
   },
   created () {
+    this.selectCarKey = this.$route.query.selectCarKey
     this.status = this.$route.query.status
   },
   methods: {
@@ -63,7 +65,25 @@ export default {
       })
     },
     toOrderReceivingSimulation () {
-      this.$router.push('/orderReceivingSimulation')
+      if (this.selectCarKey === 1) {
+        this.$router.push('/orderSimulationJoin')
+      } else if (this.selectCarKey === 2) {
+        this.$router.push('/orderSimulationSelf')
+      } else {
+        this.$router.push('/orderSimulationSelf')
+      }
+    },
+    showDcDriverApplyCommonQuestion () {
+      this.$router.push('/commonIssue')
+    },
+    dcDriverApplyContactServer () {
+      this.$webapp.sendUrlToApp('tel:4000568888', true)
+    },
+    toDownloadApp () {
+      window.location.href = 'https://a.app.qq.com/o/simple.jsp?pkgname=com.delelong.dachangcxdr'
+    },
+    toReapply () {
+      this.$router.replace('/')
     }
   }
 }

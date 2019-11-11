@@ -223,8 +223,8 @@ export default {
           'credentials.idcard_positive': this.$store.state.formData.data['id_card_b'],
           'credentials.idcard_reverse': this.$store.state.formData.data['id_card_a'],
           'credentials.driverlicense_positive': this.$store.state.formData.data['drive_card'],
+          // 'credentials.drive_register_date': this.$store.state.formData.data['driveRegisterDate'],
           // 'credentials.driverlicense_reverse': this.$store.state.driverRecruitData.cardInfo.driveCardB,
-          // 'member_apply_driver.driver_license_time': this.$store.state.formData.data['driveRegisterDate'],
           // 'member_apply_driver.address_detail': this.$store.state.formData.data['userJobCity'].cityName,
           'credentials.cert_type': this.$store.state.formData.data['hasJobStatus'] == 0 ? 1 : this.$store.state.formData.data['hasJobStatus'] == 1 ? 2 : 0,
           'credentials.qualification_certificate': this.$store.state.formData.data['hasJobStatus'] == 0 ? this.$store.state.formData.data['job_status_img'] : '',
@@ -238,7 +238,13 @@ export default {
               dataSubmitOk: true
             }
           })
-          this.$router.back()
+          this.$router.replace({
+            path: '/auditStatus',
+            query: {
+              selectCarKey: 3,
+              status: 0
+            }
+          })
         })
       })
     },

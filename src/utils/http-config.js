@@ -29,6 +29,8 @@ Axios.interceptors.request.use(config => {
   if (store.state.auth.secret) {
     config.headers['secret'] = store.state.auth.secret
   }
+  config.headers['dcmnt'] = Date.now() + '_' + parseInt((Math.random() + 1) * Math.pow(10, 6 - 1))
+  config.headers['dcsnt'] = store.state.apiDcsnt.dcsnt || 0
   return config
 })
 AxiosForm.interceptors.request.use(config => {
@@ -40,6 +42,8 @@ AxiosForm.interceptors.request.use(config => {
   if (store.state.auth.secret) {
     config.headers['secret'] = store.state.auth.secret
   }
+  config.headers['dcmnt'] = Date.now() + '_' + parseInt((Math.random() + 1) * Math.pow(10, 6 - 1))
+  config.headers['dcsnt'] = store.state.apiDcsnt.dcsnt || 0
   return config
 })
 Axios.interceptors.response.use((response) => {
@@ -49,6 +53,7 @@ Axios.interceptors.response.use((response) => {
       token: response.headers.token
     })
   }
+  store.commit('updateDcsnt', response.data.dcrts)
   return response.data
 }, (error) => {
   // eslint-disable-next-line
@@ -102,6 +107,7 @@ AxiosForm.interceptors.response.use((response) => {
       token: response.headers.token
     })
   }
+  store.commit('updateDcsnt', response.data.dcrts)
   return response.data
 }, (error) => {
   // eslint-disable-next-line
@@ -151,7 +157,21 @@ AxiosForm.interceptors.response.use((response) => {
 const FileAxios = axios.create({
   timeout: 20000
 })
+FileAxios.interceptors.request.use(config => {
+  // config.headers['appType'] = 2  // 请求的类型 1：司机、2：普通会员
+  // config.headers['devicetype'] = 5
+  // if (store.state.auth.token) {
+  //   config.headers['token'] = store.state.auth.token
+  // }
+  // if (store.state.auth.secret) {
+  //   config.headers['secret'] = store.state.auth.secret
+  // }
+  config.headers['dcmnt'] = Date.now() + '_' + parseInt((Math.random() + 1) * Math.pow(10, 6 - 1))
+  config.headers['dcsnt'] = store.state.apiDcsnt.dcsnt || 0
+  return config
+})
 FileAxios.interceptors.response.use((response) => {
+  store.commit('updateDcsnt', response.data.dcrts)
   return response.data
 }, (error) => {
   // eslint-disable-next-line

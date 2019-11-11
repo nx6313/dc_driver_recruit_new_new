@@ -1,19 +1,5 @@
 <template>
   <div class="orderReceivingSimulation">
-    <audio ref="welcome" :src="require('@/static/sounds/welcome.mp3')" preload hidden></audio>
-    <audio ref="startOrder" :src="require('@/static/sounds/startOrder.mp3')" preload hidden></audio>
-    <audio ref="waitOrder" :src="require('@/static/sounds/waitOrder.mp3')" preload hidden></audio>
-    <audio ref="jieDan" :src="require('@/static/sounds/jieDan.mp3')" preload hidden></audio>
-    <audio ref="callToUser" :src="require('@/static/sounds/callToUser.mp3')" preload hidden></audio>
-    <audio ref="hasArrStartAddress" :src="require('@/static/sounds/hasArrStartAddress.mp3')" preload hidden></audio>
-    <audio ref="hasGetUser" :src="require('@/static/sounds/hasGetUser.mp3')" preload hidden></audio>
-    <audio ref="hasArrEndAddress" :src="require('@/static/sounds/hasArrEndAddress.mp3')" preload hidden></audio>
-    <audio ref="sureToIn" :src="require('@/static/sounds/sureToIn.mp3')" preload hidden></audio>
-    <audio ref="todayLiushui" :src="require('@/static/sounds/todayLiushui.mp3')" preload hidden></audio>
-    <audio ref="todayOnlineTime" :src="require('@/static/sounds/todayOnlineTime.mp3')" preload hidden></audio>
-    <audio ref="todayOrderCount" :src="require('@/static/sounds/todayOrderCount.mp3')" preload hidden></audio>
-    <audio ref="workStage" :src="require('@/static/sounds/workStage.mp3')" preload hidden></audio>
-    <audio ref="endIsEasy" :src="require('@/static/sounds/endIsEasy.mp3')" preload hidden></audio>
     <div class="loadResourceWrap animated fadeIn faster" ref="loadResourceWrap">
       <div class="loadingBar">
         <div class="outBg">
@@ -187,13 +173,55 @@ export default {
         }
       },
       toNextTimer: null,
-      canToNext: true
+      canToNext: true,
+      audio_welcome: null,
+      audio_startOrder: null,
+      audio_waitOrder: null,
+      audio_jieDan: null,
+      audio_callToUser: null,
+      audio_hasArrStartAddress: null,
+      audio_hasGetUser: null,
+      audio_hasArrEndAddress: null,
+      audio_sureToIn: null,
+      audio_todayLiushui: null,
+      audio_todayOnlineTime: null,
+      audio_todayOrderCount: null,
+      audio_workStage: null,
+      audio_endIsEasy: null
     }
   },
   mounted () {
     this.preload()
   },
   created () {
+    this.audio_welcome = new Audio()
+    this.audio_welcome.src = require('@/static/sounds/welcome.mp3')
+    this.audio_startOrder = new Audio()
+    this.audio_startOrder.src = require('@/static/sounds/startOrder.mp3')
+    this.audio_waitOrder = new Audio()
+    this.audio_waitOrder.src = require('@/static/sounds/waitOrder.mp3')
+    this.audio_jieDan = new Audio()
+    this.audio_jieDan.src = require('@/static/sounds/jieDan.mp3')
+    this.audio_callToUser = new Audio()
+    this.audio_callToUser.src = require('@/static/sounds/callToUser.mp3')
+    this.audio_hasArrStartAddress = new Audio()
+    this.audio_hasArrStartAddress.src = require('@/static/sounds/hasArrStartAddress.mp3')
+    this.audio_hasGetUser = new Audio()
+    this.audio_hasGetUser.src = require('@/static/sounds/hasGetUser.mp3')
+    this.audio_hasArrEndAddress = new Audio()
+    this.audio_hasArrEndAddress.src = require('@/static/sounds/hasArrEndAddress.mp3')
+    this.audio_sureToIn = new Audio()
+    this.audio_sureToIn.src = require('@/static/sounds/sureToIn.mp3')
+    this.audio_todayLiushui = new Audio()
+    this.audio_todayLiushui.src = require('@/static/sounds/todayLiushui.mp3')
+    this.audio_todayOnlineTime = new Audio()
+    this.audio_todayOnlineTime.src = require('@/static/sounds/todayOnlineTime.mp3')
+    this.audio_todayOrderCount = new Audio()
+    this.audio_todayOrderCount.src = require('@/static/sounds/todayOrderCount.mp3')
+    this.audio_workStage = new Audio()
+    this.audio_workStage.src = require('@/static/sounds/workStage.mp3')
+    this.audio_endIsEasy = new Audio()
+    this.audio_endIsEasy.src = require('@/static/sounds/endIsEasy.mp3')
   },
   methods: {
     preload () {
@@ -269,7 +297,8 @@ export default {
         this.curPlayingSound.pause()
         this.curPlayingSound = null
       }
-      this.$router.back()
+      // this.$router.back()
+      if (window) window.location.href = 'dcapp://close'
     },
     learnAgain () {
       if (!this.canToNext) return false
@@ -282,46 +311,46 @@ export default {
       }
       if (key === 0) {
         // 播放 欢迎语
-        this.curPlayingSound = this.$refs.welcome
+        this.curPlayingSound = this.audio_welcome
       } else if (key === 1) {
         // 播放 点击按钮开始接单
-        this.curPlayingSound = this.$refs.startOrder
+        this.curPlayingSound = this.audio_startOrder
       } else if (key === 2) {
         // 播放 正在等待接单中
-        this.curPlayingSound = this.$refs.waitOrder
+        this.curPlayingSound = this.audio_waitOrder
       } else if (key === 3) {
         // 播放 点击按钮去接乘客
-        this.curPlayingSound = this.$refs.jieDan
+        this.curPlayingSound = this.audio_jieDan
       } else if (key === 4) {
         // 播放 点击按钮联系乘客
-        this.curPlayingSound = this.$refs.callToUser
+        this.curPlayingSound = this.audio_callToUser
       } else if (key === 5) {
         // 播放 到达预约地点后滑动按钮
-        this.curPlayingSound = this.$refs.hasArrStartAddress
+        this.curPlayingSound = this.audio_hasArrStartAddress
       } else if (key === 6) {
         // 播放 接到乘客滑动按钮
-        this.curPlayingSound = this.$refs.hasGetUser
+        this.curPlayingSound = this.audio_hasGetUser
       } else if (key === 7) {
         // 播放 到达目的地
-        this.curPlayingSound = this.$refs.hasArrEndAddress
+        this.curPlayingSound = this.audio_hasArrEndAddress
       } else if (key === 8) {
         // 播放 确认结算
-        this.curPlayingSound = this.$refs.sureToIn
+        this.curPlayingSound = this.audio_sureToIn
       } else if (key === 9) {
         // 播放 这里是今日订单流水
-        this.curPlayingSound = this.$refs.todayLiushui
+        this.curPlayingSound = this.audio_todayLiushui
       } else if (key === 10) {
         // 播放 这里是今日在线时长
-        this.curPlayingSound = this.$refs.todayOnlineTime
+        this.curPlayingSound = this.audio_todayOnlineTime
       } else if (key === 11) {
         // 播放 这里是今日接单数量
-        this.curPlayingSound = this.$refs.todayOrderCount
+        this.curPlayingSound = this.audio_todayOrderCount
       } else if (key === 12) {
         // 播放 这里是今日接单数量
-        this.curPlayingSound = this.$refs.workStage
+        this.curPlayingSound = this.audio_workStage
       } else if (key === 13) {
         // 播放 结束语
-        this.curPlayingSound = this.$refs.endIsEasy
+        this.curPlayingSound = this.audio_endIsEasy
       }
       if (this.curPlayingSound != null) {
         this.curPlayingSound.load()
@@ -347,11 +376,13 @@ export default {
         clearTimeout(this.loadTimer)
         this.$refs.loadResourceWrap.classList.remove('fadeIn', 'faster')
         this.$refs.loadResourceWrap.classList.add('fadeOut')
-        this.$refs.loadResourceWrap.addEventListener('animationend', () => {
+        setTimeout(() => {
           this.$refs.loadResourceWrap.style.zIndex = 0
           this.step = 0
-          this.playSound(this.step)
-        })
+          this.$nextTick(() => {
+            this.playSound(this.step)
+          })
+        }, 400)
       }
     }
   }

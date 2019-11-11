@@ -48,6 +48,8 @@ Vue.prototype.$api = Api
 Vue.prototype.$webapp = WebApp
 Vue.prototype.$appData = APP_DATA
 
+Vue.prototype.$SCREEN_OPT = { width: document.body.clientWidth, height: document.body.clientHeight }
+
 if (location.host.endsWith('.com')) {
   Vue.prototype.$BASE_URL = location.origin + '/'
   Vue.prototype.$BASE_HOST = location.host
@@ -58,7 +60,7 @@ if (location.host.endsWith('.com')) {
   Vue.prototype.$SHOW_TEST_TOOL = APP_CONFIG.isTest
 }
 
-if (Vue.prototype.$SHOW_TEST_TOOL) Vue.use(VConsole, { vuexStore: store, showToast: DialogMsg.installMsg, router: router })
+Vue.use(VConsole, { vuexStore: store, showToast: DialogMsg.installMsg, router: router })
 
 new Vue({
   router,

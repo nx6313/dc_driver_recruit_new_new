@@ -7,8 +7,8 @@ export default {
     console.log(window, this.isAndroidIos())
   },
   // 通过链接调用原生方法 ios android 通用
-  sendUrlToApp: mutuallyPath => {
-    if (window) window.location.href = mutuallyKey + mutuallyPath
+  sendUrlToApp: (mutuallyPath, fullFlag = false) => {
+    if (window) window.location.href = fullFlag ? '' : mutuallyKey + mutuallyPath
   },
   // 判断设备类型
   isAndroidIos: () => {
