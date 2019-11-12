@@ -3,7 +3,7 @@
     <div class="citySelectInput" @click="toSelectCity">
       <span class="selectTitle">选择工作城市</span>
       <div class="selectTip">
-        <span>{{curSelectedCity != null ? curSelectedCity : '点击选择'}}</span>
+        <span :class="curSelectedCity != null ? 'selectTipHasSelected' : ''">{{curSelectedCity != null ? curSelectedCity : '点击选择'}}</span>
         <i class="cityArrow iconfont">&#xe633;</i>
       </div>
     </div>
@@ -87,6 +87,9 @@ export default {
       position: relative;
       color: #999999;
       font-size: 0.8rem;
+      .selectTipHasSelected {
+        color: #3d3d3d;
+      }
       .cityArrow {
         position: relative;
         font-size: 0.8rem;

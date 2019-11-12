@@ -44,5 +44,7 @@ export default {
   // 城际司机----司机重新提交资料
   updateDriverImgUrl: 'driver/api/intercity/updateDriverImgUrl',
   // 城际司机----修改资料后,重新提交审核
-  conserveDriver: 'driver/api/intercity/conserveDriver'
+  conserveDriver: 'driver/api/intercity/conserveDriver',
+  // 加盟司机----审核拒绝，重新申请
+  deleJoinDriver: 'driver/api/intercity/deleJoinDriver'
 }

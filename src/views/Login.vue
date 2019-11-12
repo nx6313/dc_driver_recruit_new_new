@@ -131,7 +131,7 @@ export default {
         })
       } else if (key == 2) {
         // 大昌专车
-        window.location.href = `${location.origin.startsWith('http://localhost:') ? 'https://test.dcchuxing.com' : location.origin}/h5/new_driver_recruit/#/?token=${this.$store.state.auth.token}&secret=${this.$store.state.auth.secret}`
+        window.location.href = `${location.origin.startsWith('http://localhost:') ? 'https://test.dcchuxing.com' : location.origin}/h5/new_driver_recruit/#/fullTimeHome?token=${this.$store.state.auth.token}&secret=${this.$store.state.auth.secret}`
       } else if (key == 3) {
         // 城际专线
         this.$http.postForm(this, this.$api.getIntercityStatus, {

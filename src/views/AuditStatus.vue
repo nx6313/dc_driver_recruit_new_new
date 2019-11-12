@@ -39,7 +39,7 @@ export default {
     }
   },
   created () {
-    this.selectCarKey = this.$route.query.selectCarKey
+    this.selectCarKey = typeof(this.$route.query.selectCarKey) !== 'undefined' ? this.$route.query.selectCarKey : (this.$store.state.pageData.data && this.$store.state.pageData.data.selectCarKey)
     this.status = this.$route.query.status
   },
   methods: {
@@ -65,25 +65,47 @@ export default {
       })
     },
     toOrderReceivingSimulation () {
+      this.$store.commit('setPageData', {
+        data: {
+          selectCarKey: this.selectCarKey
+        }
+      })
       if (this.selectCarKey === 1) {
         this.$router.push('/orderSimulationJoin')
       } else if (this.selectCarKey === 2) {
         this.$router.push('/orderSimulationSelf')
-      } else {
+      } else if (this.selectCarKey === 3) {
+        // 城际车的模拟接单流程没有做
         this.$router.push('/orderSimulationSelf')
+      } else {
+        this.$router.push('/orderSimulationJoin')
       }
     },
     showDcDriverApplyCommonQuestion () {
+      this.$store.commit('setPageData', {
+        data: {
+          selectCarKey: this.selectCarKey
+        }
+      })
       this.$router.push('/commonIssue')
     },
     dcDriverApplyContactServer () {
-      this.$webapp.sendUrlToApp('tel:4000568888', true)
+      this.$webapp.sendUrlToApp('tel://4000568888', true)
     },
     toDownloadApp () {
       window.location.href = 'https://a.app.qq.com/o/simple.jsp?pkgname=com.delelong.dachangcxdr'
     },
     toReapply () {
-      this.$router.replace('/')
+      if (this.selectCarKey == 1) {
+        this.$http.postForm(this, this.$api.deleJoinDriver, {
+          type: this.selectCarKey,
+          phone: this.$store.state.userBaseInfo.phone
+        }).then(() => {
+          this.$router.replace('/')
+        })
+      } else if (this.selectCarKey == 3) {
+        this.dataCompletion()
+      }
     }
   }
 }

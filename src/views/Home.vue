@@ -49,7 +49,7 @@ export default {
       this.$router.push('/commonIssue')
     },
     dcDriverApplyContactServer () {
-      this.$webapp.sendUrlToApp('tel:4000568888', true)
+      this.$webapp.sendUrlToApp('tel://4000568888', true)
     },
     toJoinDcDriver () {
       this.$router.push('/applyIndex')

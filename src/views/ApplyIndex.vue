@@ -74,7 +74,7 @@ export default {
     toApplyJoinDcDriver () {
       if (!this.$appData.hasAuthInfoInUrl(this) && !this.$appData.hasAuthInfo(this) && this.autoShowLoginPage) {
         console.log('正在通过 h5 方式访问，没有检测到登陆信息')
-        // this.$router.push('/login')
+        this.$router.push('/login')
         return false
       }
       if (this.selectCarKey == 1) {
@@ -94,7 +94,7 @@ export default {
           }
         })
       } else if (this.selectCarKey == 2) {
-        window.location.href = `${location.origin.startsWith('http://localhost:') ? 'https://test.dcchuxing.com' : location.origin}/h5/new_driver_recruit/#/?token=${this.$store.state.auth.token}&secret=${this.$store.state.auth.secret}`
+        window.location.href = `${location.origin.startsWith('http://localhost:') ? 'https://test.dcchuxing.com' : location.origin}/h5/new_driver_recruit/#/fullTimeHome?token=${this.$store.state.auth.token}&secret=${this.$store.state.auth.secret}`
       } else if (this.selectCarKey == 3) {
         this.$http.postForm(this, this.$api.getIntercityStatus, {
           phone: this.$store.state.userBaseInfo.phone
