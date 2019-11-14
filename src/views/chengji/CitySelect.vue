@@ -50,6 +50,7 @@ export default {
       this.$router.push('/chengji/citySelectHandler')
     },
     prepareOk () {
+      if (this.curSelectedCity == null) { this.$comfun.showToast(this, '请先选择工作城市'); return false }
       this.$router.push('/chengji/userInfoForm')
     }
   }

@@ -218,6 +218,10 @@ export default {
       this.carRegisterDate = e.format('YYYY-MM-DD')
     },
     submitToCheck () {
+      if (this.carPlateNo.trim().length > 6) {
+        this.$comfun.showToast(this, '请输入正确的车牌号')
+        return false
+      }
       this.verifyData(() => {
         this.$store.commit('addFormData', {
           key: 'carPlate',
@@ -225,7 +229,7 @@ export default {
         })
         this.$store.commit('addFormData', {
           key: 'carPlateNo',
-          value: this.carPlateNo.trim()
+          value: this.carPlateNo.trim().toUpperCase()
         })
         this.$store.commit('addFormData', {
           key: 'carBrand',
@@ -262,7 +266,8 @@ export default {
         'car.color': this.$store.state.formData.data['carColor'],
         'car.OwnerName': this.$store.state.formData.data['carOwner'],
         'car.vehicle_license_positive': this.$store.state.formData.data['run_card'],
-        'car.transportation_certificate': this.$store.state.formData.data['runCertificate'] == 0 ? this.$store.state.formData.data['run_certificate_img'] : ''
+        'car.transportation_certificate': this.$store.state.formData.data['runCertificate'] == 0 ? this.$store.state.formData.data['run_certificate_img'] : '',
+        'city_code': this.$store.state.formData.data['userJobCity'].cityCode
       }).then(carInfoResult => {
         this.$comfun.showToast(this, '信息提交完成，请等待审核')
         this.$store.commit('setPageData', {

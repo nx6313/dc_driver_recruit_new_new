@@ -55,6 +55,7 @@ export default {
       this.$router.push('/jiameng/citySelectHandler')
     },
     prepareOk () {
+      if (this.curSelectedCity == null) { this.$comfun.showToast(this, '请先选择工作城市'); return false }
       this.$router.push('/jiameng/userInfoForm')
     }
   }
